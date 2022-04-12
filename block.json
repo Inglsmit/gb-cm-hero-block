@@ -1,0 +1,15 @@
+{
+	"apiVersion": 2,
+	"name": "cm-block/hero-block",
+	"title": "Hero block",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "CM hero block - image, title, subtitle.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "hero-block",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
