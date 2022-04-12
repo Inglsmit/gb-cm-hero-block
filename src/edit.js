@@ -5,7 +5,7 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p {...useBlockProps()}>
-			{__('Boilerplate – hello from the editor!', 'hero blocks')}
+			{__('HERO BLOCK – hello from the editor!', 'hero-block')}
 		</p>
 	);
 }
