@@ -3,7 +3,7 @@
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const { title, description, id, url, alt, btnTitle, btnUrl } = attributes;
+	const { id, url, alt } = attributes;
 	return (
 		<div {...useBlockProps.save()}>
 			{url && (

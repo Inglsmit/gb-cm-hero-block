@@ -1,9 +1,39 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-cm-block-hero-block {
 
-.wp-block-create-block-boilerplate {
-	border: 1px dotted #f03;
+	&-holder {
+		position: relative;
+	}
+
+	&-img-wrap {
+		width: 100%;
+	}
+
+	&-img {
+		width: 100%;
+	}
+
+	&-inner-block {
+		margin: 0 17px;
+		display: flex;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		.wp-block-heading,
+		.wp-block-paragraph {
+			color: #fff;
+		}
+
+		.wp-block-button {
+			margin: 0;
+
+			&-link {
+				background-color: #00aeef;
+			}
+		}
+
+	}
 }

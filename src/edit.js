@@ -12,7 +12,7 @@ import { Spinner, ToolbarButton } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { id, url, alt, btnTitle, btnUrl } = attributes;
+	const { id, url, alt } = attributes;
 
 	const onSelectImage = (image) => {
 		if (!image || !image.url) {
@@ -41,7 +41,7 @@ export default function Edit({ attributes, setAttributes }) {
 	const HERO_BLOCK_TEMPLATE = [
 		['core/heading', { placeholder: 'Title' }],
 		['core/paragraph', { placeholder: 'Description' }],
-		['core/button', { placeholder: 'Link' }, { anchor: true }],
+		['core/button', { placeholder: 'Link' }],
 	];
 
 	return (
@@ -65,30 +65,39 @@ export default function Edit({ attributes, setAttributes }) {
 				</BlockControls>
 			)}
 			<div {...useBlockProps()}>
-				{url && (
-					<div
-						className={`wp-block-cm-block-hero-block-img${
-							isBlobURL(url) ? ' is-loading' : ''
-						}`}
-					>
-						<img src={url} alt={alt} />
-						{isBlobURL(url) && <Spinner />}
+				<div className="wp-block-cm-block-hero-block-holder">
+					{url && (
+						<div
+							className={`wp-block-cm-block-hero-block-img-wrap${
+								isBlobURL(url) ? ' is-loading' : ''
+							}`}
+						>
+							<img
+								className="wp-block-cm-block-hero-block-img"
+								src={url}
+								alt={alt}
+							/>
+							{isBlobURL(url) && <Spinner />}
+						</div>
+					)}
+
+					<MediaPlaceholder
+						icon="admin-users"
+						onSelect={onSelectImage}
+						onSelectURL={onSelectURL}
+						// eslint-disable-next-line no-console
+						onError={(err) => console.log(err)}
+						accept="image/*"
+						allowedTypes={['image']}
+						disableMediaButtons={url}
+					/>
+					<div className="wp-block-cm-block-hero-block-inner-block">
+						<InnerBlocks
+							template={HERO_BLOCK_TEMPLATE}
+							templateLock="all"
+						/>
 					</div>
-				)}
-				<MediaPlaceholder
-					icon="admin-users"
-					onSelect={onSelectImage}
-					onSelectURL={onSelectURL}
-					// eslint-disable-next-line no-console
-					onError={(err) => console.log(err)}
-					accept="image/*"
-					allowedTypes={['image']}
-					disableMediaButtons={url}
-				/>
-				<InnerBlocks
-					template={HERO_BLOCK_TEMPLATE}
-					templateLock="all"
-				/>
+				</div>
 			</div>
 		</>
 	);
