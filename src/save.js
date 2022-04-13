@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
 	const { title, description, id, url, alt, btnTitle, btnUrl } = attributes;
@@ -13,10 +13,7 @@ export default function save({ attributes }) {
 					className={id ? `wp-image-${id}` : null}
 				/>
 			)}
-			{title && <RichText.Content tagName="h1" value={title} />}
-			{description && (
-				<RichText.Content tagName="p" value={description} />
-			)}
+			<InnerBlocks.Content />
 		</div>
 	);
 }

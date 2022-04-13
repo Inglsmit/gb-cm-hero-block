@@ -2,22 +2,18 @@
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
-	RichText,
 	MediaPlaceholder,
+	BlockControls,
+	MediaReplaceFlow,
+	InnerBlocks,
 } from '@wordpress/block-editor';
 import { isBlobURL } from '@wordpress/blob';
-import { Spinner } from '@wordpress/components';
+import { Spinner, ToolbarButton } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { title, description, id, url, alt, btnTitle, btnUrl } = attributes;
+	const { id, url, alt, btnTitle, btnUrl } = attributes;
 
-	const onChangeTitle = (newTitle) => {
-		setAttributes({ title: newTitle });
-	};
-	const onChangeDescription = (newDescription) => {
-		setAttributes({ description: newDescription });
-	};
 	const onSelectImage = (image) => {
 		if (!image || !image.url) {
 			setAttributes({ url: undefined, id: undefined, alt: '' });
@@ -34,42 +30,66 @@ export default function Edit({ attributes, setAttributes }) {
 		});
 	};
 
+	const removeImage = () => {
+		setAttributes({
+			url: undefined,
+			alt: '',
+			id: undefined,
+		});
+	};
+
+	const HERO_BLOCK_TEMPLATE = [
+		['core/heading', { placeholder: 'Title' }],
+		['core/paragraph', { placeholder: 'Description' }],
+		['core/button', { placeholder: 'Link' }, { anchor: true }],
+	];
+
 	return (
-		<p {...useBlockProps()}>
+		<>
 			{url && (
-				<div
-					className={`wp-block-cm-block-hero-block-img${
-						isBlobURL(url) ? ' is-loading' : ''
-					}`}
-				>
-					<img src={url} alt={alt} />
-					{isBlobURL(url) && <Spinner />}
-				</div>
+				<BlockControls group="inline">
+					<MediaReplaceFlow
+						name={__('Replace Image', 'team-members')}
+						onSelect={onSelectImage}
+						onSelectURL={onSelectURL}
+						// eslint-disable-next-line no-console
+						onError={(err) => console.log(err)}
+						accept="image/*"
+						allowedTypes={['image']}
+						mediaId={id}
+						mediaURL={url}
+					/>
+					<ToolbarButton onClick={removeImage}>
+						{__('Remove Image', 'team-members')}
+					</ToolbarButton>
+				</BlockControls>
 			)}
-			<MediaPlaceholder
-				icon="admin-users"
-				onSelect={onSelectImage}
-				onSelectURL={onSelectURL}
-				// eslint-disable-next-line no-console
-				onError={(err) => console.log(err)}
-				accept="image/*"
-				allowedTypes={['image']}
-				disableMediaButtons={url}
-			/>
-			<RichText
-				placeholder={__('Title', 'hero-block')}
-				tagName="h4"
-				onChange={onChangeTitle}
-				value={title}
-				allowedFormats={[]}
-			/>
-			<RichText
-				placeholder={__('Description', 'hero-block')}
-				tagName="p"
-				onChange={onChangeDescription}
-				value={description}
-				allowedFormats={[]}
-			/>
-		</p>
+			<div {...useBlockProps()}>
+				{url && (
+					<div
+						className={`wp-block-cm-block-hero-block-img${
+							isBlobURL(url) ? ' is-loading' : ''
+						}`}
+					>
+						<img src={url} alt={alt} />
+						{isBlobURL(url) && <Spinner />}
+					</div>
+				)}
+				<MediaPlaceholder
+					icon="admin-users"
+					onSelect={onSelectImage}
+					onSelectURL={onSelectURL}
+					// eslint-disable-next-line no-console
+					onError={(err) => console.log(err)}
+					accept="image/*"
+					allowedTypes={['image']}
+					disableMediaButtons={url}
+				/>
+				<InnerBlocks
+					template={HERO_BLOCK_TEMPLATE}
+					templateLock="all"
+				/>
+			</div>
+		</>
 	);
 }
