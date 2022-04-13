@@ -1,18 +1,18 @@
 .wp-block-cm-block-hero-block {
 
-	&-holder {
+	&__holder {
 		position: relative;
 	}
 
-	&-img-wrap {
+	&__img-wrap {
 		width: 100%;
 	}
 
-	&-img {
+	&__img {
 		width: 100%;
 	}
 
-	&-inner-block {
+	&__inner-block {
 		margin: 0 17px;
 		display: flex;
 		width: 100%;
@@ -30,7 +30,7 @@
 		.wp-block-button {
 			margin: 0;
 
-			&-link {
+			&__link {
 				background-color: #00aeef;
 			}
 		}

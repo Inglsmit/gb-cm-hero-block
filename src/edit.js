@@ -65,15 +65,15 @@ export default function Edit({ attributes, setAttributes }) {
 				</BlockControls>
 			)}
 			<div {...useBlockProps()}>
-				<div className="wp-block-cm-block-hero-block-holder">
+				<div className="wp-block-cm-block-hero-block__holder">
 					{url && (
 						<div
-							className={`wp-block-cm-block-hero-block-img-wrap${
+							className={`wp-block-cm-block-hero-block__img-wrap${
 								isBlobURL(url) ? ' is-loading' : ''
 							}`}
 						>
 							<img
-								className="wp-block-cm-block-hero-block-img"
+								className="wp-block-cm-block-hero-block__img"
 								src={url}
 								alt={alt}
 							/>
@@ -91,7 +91,7 @@ export default function Edit({ attributes, setAttributes }) {
 						allowedTypes={['image']}
 						disableMediaButtons={url}
 					/>
-					<div className="wp-block-cm-block-hero-block-inner-block">
+					<div className="wp-block-cm-block-hero-block__inner-block">
 						<InnerBlocks
 							template={HERO_BLOCK_TEMPLATE}
 							templateLock="all"
