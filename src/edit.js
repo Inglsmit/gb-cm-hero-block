@@ -12,29 +12,38 @@ import { Spinner, ToolbarButton } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { id, url, alt } = attributes;
+	const { id, url, alt, type } = attributes;
 
-	const onSelectImage = (image) => {
-		if (!image || !image.url) {
-			setAttributes({ url: undefined, id: undefined, alt: '' });
+	const onSelectMedia = (media) => {
+		// console.log(media);
+		if (!media || !media.url) {
+			setAttributes({ url: undefined, id: undefined, alt: '', type: '' });
 			return;
 		}
-		setAttributes({ url: image.url, id: image.id, alt: image.alt });
-	};
-
-	const onSelectURL = (newURL) => {
 		setAttributes({
-			url: newURL,
-			id: undefined,
-			alt: '',
+			url: media.url,
+			id: media.id,
+			alt: media.alt,
+			type: media.type,
 		});
 	};
 
-	const removeImage = () => {
+	// const onSelectURL = (...debug) => {
+	// 	console.log(debug);
+	// 	setAttributes({
+	// 		url: newURL,
+	// 		id: undefined,
+	// 		alt: '',
+	// 		type: '',
+	// 	});
+	// };
+
+	const removeMedia = () => {
 		setAttributes({
 			url: undefined,
 			alt: '',
 			id: undefined,
+			type: '',
 		});
 	};
 
@@ -49,18 +58,18 @@ export default function Edit({ attributes, setAttributes }) {
 			{url && (
 				<BlockControls group="inline">
 					<MediaReplaceFlow
-						name={__('Replace Image', 'team-members')}
-						onSelect={onSelectImage}
-						onSelectURL={onSelectURL}
+						name={__('Replace Media', 'team-members')}
+						onSelect={onSelectMedia}
+						// onSelectURL={onSelectURL}
 						// eslint-disable-next-line no-console
 						onError={(err) => console.log(err)}
-						accept="image/*"
-						allowedTypes={['image']}
+						accept="image/*, video/*"
+						allowedTypes={['image', 'video']}
 						mediaId={id}
 						mediaURL={url}
 					/>
-					<ToolbarButton onClick={removeImage}>
-						{__('Remove Image', 'team-members')}
+					<ToolbarButton onClick={removeMedia}>
+						{__('Remove Media', 'team-members')}
 					</ToolbarButton>
 				</BlockControls>
 			)}
@@ -72,31 +81,37 @@ export default function Edit({ attributes, setAttributes }) {
 								isBlobURL(url) ? ' is-loading' : ''
 							}`}
 						>
-							<img
-								className="wp-block-cm-block-hero-block__img"
-								src={url}
-								alt={alt}
-							/>
+							{type === 'image' ? (
+								<img
+									className="wp-block-cm-block-hero-block__img"
+									src={url}
+									alt={alt}
+								/>
+							) : (
+								<video src={url} />
+							)}
+
 							{isBlobURL(url) && <Spinner />}
 						</div>
 					)}
 
 					<MediaPlaceholder
 						icon="admin-users"
-						onSelect={onSelectImage}
-						onSelectURL={onSelectURL}
+						onSelect={onSelectMedia}
 						// eslint-disable-next-line no-console
 						onError={(err) => console.log(err)}
-						accept="image/*"
-						allowedTypes={['image']}
+						accept="image/*, video/*"
+						allowedTypes={['image', 'video']}
 						disableMediaButtons={url}
 					/>
-					<div className="wp-block-cm-block-hero-block__inner-block">
-						<InnerBlocks
-							template={HERO_BLOCK_TEMPLATE}
-							templateLock="all"
-						/>
-					</div>
+					{url && (
+						<div className="wp-block-cm-block-hero-block__inner-block">
+							<InnerBlocks
+								template={HERO_BLOCK_TEMPLATE}
+								templateLock="all"
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</>

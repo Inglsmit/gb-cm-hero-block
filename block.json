@@ -25,16 +25,8 @@
 			"selector": "img",
 			"attribute": "src"
 		},
-		"btnTitle": {
-			"type": "string",
-			"source": "html",
-			"selector": "a"
-		},
-		"btnUrl": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "href"
+		"type": {
+			"type": "string"
 		}
 	},
 	"textdomain": "hero-block",

@@ -2,6 +2,15 @@
 
 	&__holder {
 		position: relative;
+
+		&::before {
+			content: "";
+			background-image: url(https://columbiaokura.com/wp-content/themes/machina-theme/images/machina-hero-bg-pattern.png?c0514cac39f7d428997dfcd202010b28);
+			background-repeat: repeat;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
 	}
 
 	&__img-wrap {

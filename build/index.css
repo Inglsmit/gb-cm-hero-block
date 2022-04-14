@@ -1,1 +1,42 @@
-.wp-block-cm-block-hero-block__holder{position:relative}.wp-block-cm-block-hero-block__img,.wp-block-cm-block-hero-block__img-wrap{width:100%}.wp-block-cm-block-hero-block__inner-block{align-items:center;display:flex;height:100%;left:0;margin:0 17px;position:absolute;top:0;width:100%}.wp-block-cm-block-hero-block__inner-block .wp-block-heading,.wp-block-cm-block-hero-block__inner-block .wp-block-paragraph{color:#fff}.wp-block-cm-block-hero-block__inner-block .wp-block-button{margin:0}.wp-block-cm-block-hero-block__inner-block .wp-block-button__link{background-color:#00aeef}
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/editor.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+.wp-block-cm-block-hero-block__holder {
+  position: relative;
+}
+.wp-block-cm-block-hero-block__holder::before {
+  content: "";
+  background-image: url(https://columbiaokura.com/wp-content/themes/machina-theme/images/machina-hero-bg-pattern.png?c0514cac39f7d428997dfcd202010b28);
+  background-repeat: repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.wp-block-cm-block-hero-block__img-wrap {
+  width: 100%;
+}
+.wp-block-cm-block-hero-block__img {
+  width: 100%;
+}
+.wp-block-cm-block-hero-block__inner-block {
+  margin: 0 17px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.wp-block-cm-block-hero-block__inner-block .wp-block-heading,
+.wp-block-cm-block-hero-block__inner-block .wp-block-paragraph {
+  color: #fff;
+}
+.wp-block-cm-block-hero-block__inner-block .wp-block-button {
+  margin: 0;
+}
+.wp-block-cm-block-hero-block__inner-block .wp-block-button__link {
+  background-color: #00aeef;
+}
+
+/*# sourceMappingURL=index.css.map*/
