@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "DINCondensedWebDemiBold";
+  src: url("../fonts/fonts/DIN-Condensed_Demi-Bold.woff2") format("woff2"),
+    url("/src/fonts/fonts/DIN-Condensed_Demi-Bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DINCondensedWebNormal";
+  src: url("/src/fonts/fonts/DIN-Condensed_Normal.woff2") format("woff2"),
+    url("/src/fonts/fonts/DIN-Condensed_Normal.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

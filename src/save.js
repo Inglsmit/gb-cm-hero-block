@@ -8,24 +8,32 @@ export default function save({ attributes }) {
 		<div {...useBlockProps.save()}>
 			{url && (
 				<>
-					{type === 'image' ? (
-						<img
-							src={url}
-							alt={alt}
-							className={id ? `wp-image-${id}` : null}
-						/>
-					) : (
-						<video
-							autoPlay
-							muted
-							src={url}
-							alt={alt}
-							className={id ? `wp-video-${id}` : null}
-						></video>
-					)}
+					<section className="hero">
+						<div className="section-wrap">
+							<div className="hero__text-box">
+								<InnerBlocks.Content />
+							</div>
+						</div>
+						<div className="hero__bg-mask">
+							{type === 'image' ? (
+								<img
+									src={url}
+									alt={alt}
+									className={id ? `wp-image-${id}` : null}
+								/>
+							) : (
+								<video
+									autoPlay
+									muted
+									src={url}
+									alt={alt}
+									className={id ? `wp-video-${id}` : null}
+								></video>
+							)}
+						</div>
+					</section>
 				</>
 			)}
-			<InnerBlocks.Content />
 		</div>
 	);
 }

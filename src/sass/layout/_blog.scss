@@ -1,0 +1,341 @@
+.sort-article {
+  margin: 5.6rem 0 4rem 0;
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    column-gap: 2.4rem;
+    row-gap: 2.4rem;
+    @include respond(tablet) {
+      flex-direction: row;
+    }
+  }
+
+  &__sort-by {
+    display: flex;
+    align-items: center;
+    min-width: max-content;
+    font-family: "DINCondensedWebDemiBold", sans-serif;
+    font-size: 3rem;
+    line-height: 3.6rem;
+    color: #0066b3;
+
+    @include respond(tablet) {
+      flex-direction: row;
+      font-size: 4rem;
+      line-height: 4rem;
+    }
+  }
+
+  &__tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.8rem;
+    row-gap: 0.8rem;
+  }
+
+  @include respond(tablet) {
+    margin: 9.6rem 0 4rem 0;
+  }
+}
+
+.top-article {
+  margin: 9.6rem 0;
+
+  &__wrap {
+    display: flex;
+    column-gap: 2.4rem;
+  }
+  &__large-article {
+    width: 100%;
+    @include respond(tablet) {
+      width: calc(68% - 1.7rem);
+    }
+    @include respond(big-desktop) {
+      width: calc(68% - 2.8rem);
+    }
+  }
+  &__img-box {
+    margin-bottom: 1.6rem;
+  }
+  &__link {
+    font-family: "DINCondensedWebNormal", sans-serif;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    font-size: 3rem;
+    line-height: 3rem;
+
+    @include respond(tablet) {
+      line-height: 4rem;
+      width: 50%;
+      font-size: 4rem;
+    }
+  }
+  .paragraph {
+    &.top-article__text {
+      margin-bottom: 1.2rem;
+    }
+  }
+  &__text {
+    line-height: 2.8rem;
+    width: 75%;
+  }
+
+  &__large-article--wide {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    column-gap: 2.4rem;
+
+    .top-article__link {
+      width: 100%;
+      margin-bottom: 0.8rem;
+    }
+    .top-article__img-box {
+      margin-bottom: 1.6rem;
+      width: 100%;
+
+      @include respond(tablet) {
+        width: calc(68% - 1.7rem);
+      }
+      @include respond(big-desktop) {
+        width: calc(68% - 2.8rem);
+      }
+
+      img {
+        -o-object-fit: cover;
+        object-fit: cover;
+        height: calc(100vw - 32px);
+
+        @include respond(tablet) {
+          -o-object-fit: unset;
+          object-fit: unset;
+          height: auto;
+        }
+      }
+    }
+    .top-article__text {
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    .top-article__descritpion {
+      display: flex;
+      flex-direction: column;
+      @include respond(tablet) {
+        width: calc(32% + 0.4rem);
+      }
+    }
+
+    .btn-wrap {
+      margin-top: 2rem;
+    }
+    .btn {
+      width: auto;
+    }
+
+    @include respond(tablet) {
+      flex-direction: row;
+      .top-article__img-box {
+        margin-bottom: 0;
+      }
+    }
+
+    width: 100%;
+  }
+}
+
+.tag-list {
+  display: flex;
+  row-gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  .article__tag {
+    margin-right: 0.8rem;
+  }
+
+  .article-card & {
+    justify-content: left;
+    margin-bottom: 0;
+    row-gap: 0;
+    .article__tag {
+      margin-bottom: 0.8rem;
+    }
+  }
+}
+
+.article__tag {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  padding: 0.4rem 1.2rem;
+  background-color: rgb(0, 174, 239);
+  color: rgb(51, 51, 51);
+
+  @include respond(tablet) {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    padding: 0.4rem 1.2rem;
+  }
+}
+
+.trending--mobile {
+  display: block;
+  @include respond(tablet) {
+    display: none;
+  }
+}
+
+.trending {
+  &--desktop {
+    display: none;
+    @include respond(tablet) {
+      display: block;
+      width: calc(32% + 0.4rem);
+    }
+  }
+
+  &__holder {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1))
+      drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
+    background-color: #fff;
+    text-align: center;
+    padding: 2.8rem 2.8rem 1.6rem 2.8rem;
+    @include respond(tablet) {
+      padding: 5.6rem 6.4rem 1.6rem 6.4rem;
+    }
+  }
+
+  &__header {
+    &.heading-tertiary {
+      font-size: 3rem;
+      line-height: 3rem;
+      margin-bottom: 2rem;
+      padding: 0 1.2rem;
+      @include respond(tablet) {
+        padding: 0 2.4rem;
+        line-height: 4rem;
+        margin-bottom: 4rem;
+        font-size: 4rem;
+      }
+    }
+  }
+
+  &__list-item {
+    margin-bottom: 4rem;
+  }
+
+  &__title {
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  &__link {
+    font-family: "Karla", sans-serif;
+    text-decoration: none;
+    color: rgb(82, 82, 82);
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    @include respond(tablet) {
+      font-size: 2rem;
+      line-height: 2.8rem;
+    }
+  }
+}
+
+.articles {
+  padding-bottom: 0.4rem;
+
+  &__wrap {
+  }
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 2.4rem;
+    justify-content: flex-start;
+  }
+}
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 3.2rem;
+
+  &__img-box {
+    margin-bottom: 1.6rem;
+
+    img {
+      width: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      height: calc(100vw - 32px);
+
+      @include respond(tablet) {
+        -o-object-fit: unset;
+        object-fit: unset;
+        height: auto;
+      }
+    }
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .heading-tertiary {
+    @include respond(tablet) {
+    }
+  }
+  &__link {
+    font-family: "DINCondensedWebNormal", sans-serif;
+    color: inherit;
+    text-decoration: none;
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-right: 3.6rem;
+    margin-bottom: 0rem;
+
+    @include respond(tablet) {
+      font-size: 4rem;
+      line-height: 4rem;
+      min-height: 8rem;
+    }
+  }
+
+  &__text {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    flex-grow: 1;
+    margin-right: 3.6rem;
+    margin-bottom: 4rem !important;
+
+    &.paragraph {
+      @include respond(tablet) {
+        font-size: 2rem;
+        line-height: 2.8rem;
+        margin-bottom: 4rem !important;
+      }
+    }
+  }
+
+  .tag-list {
+    @include respond(tablet) {
+      margin-right: 3.6rem;
+    }
+  }
+
+  @include respond(tablet) {
+    width: calc((100% - 4.8rem) / 3);
+    margin-bottom: 8rem;
+  }
+}
