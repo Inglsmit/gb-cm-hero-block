@@ -9,42 +9,24 @@
 		"html": false
 	},
 	"attributes": {
-		"title": {
-			"type": "string",
-			"source": "html",
-			"selector": "h1"
-		},
-		"description": {
-			"type": "string",
-			"source": "html",
-			"selector": "p"
-		},
 		"id": {
 			"type": "number"
 		},
 		"alt": {
 			"type": "string",
 			"source": "attribute",
-			"selector": "img",
+			"selector": "img, video",
 			"attribute": "alt",
 			"default": ""
 		},
 		"url": {
 			"type": "string",
 			"source": "attribute",
-			"selector": "img",
+			"selector": "img, video",
 			"attribute": "src"
 		},
-		"btnTitle": {
-			"type": "string",
-			"source": "html",
-			"selector": "a"
-		},
-		"btnUrl": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "a",
-			"attribute": "href"
+		"type": {
+			"type": "string"
 		}
 	},
 	"textdomain": "hero-block",

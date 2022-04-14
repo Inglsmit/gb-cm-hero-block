@@ -22,8 +22,8 @@
 		"*.js": [
 			"wp-scripts lint-js",
 			"wp-scripts format"
-		],
-		"*.scss": "npx stylelint --fix"
+		]
+
 	},
 	"dependencies": {
 		"@wordpress/blob": "^3.6.0",

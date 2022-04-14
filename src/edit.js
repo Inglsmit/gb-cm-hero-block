@@ -2,74 +2,118 @@
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
-	RichText,
 	MediaPlaceholder,
+	BlockControls,
+	MediaReplaceFlow,
+	InnerBlocks,
 } from '@wordpress/block-editor';
 import { isBlobURL } from '@wordpress/blob';
-import { Spinner } from '@wordpress/components';
+import { Spinner, ToolbarButton } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { title, description, id, url, alt, btnTitle, btnUrl } = attributes;
+	const { id, url, alt, type } = attributes;
 
-	const onChangeTitle = (newTitle) => {
-		setAttributes({ title: newTitle });
-	};
-	const onChangeDescription = (newDescription) => {
-		setAttributes({ description: newDescription });
-	};
-	const onSelectImage = (image) => {
-		if (!image || !image.url) {
-			setAttributes({ url: undefined, id: undefined, alt: '' });
+	const onSelectMedia = (media) => {
+		// console.log(media);
+		if (!media || !media.url) {
+			setAttributes({ url: undefined, id: undefined, alt: '', type: '' });
 			return;
 		}
-		setAttributes({ url: image.url, id: image.id, alt: image.alt });
-	};
-
-	const onSelectURL = (newURL) => {
 		setAttributes({
-			url: newURL,
-			id: undefined,
-			alt: '',
+			url: media.url,
+			id: media.id,
+			alt: media.alt,
+			type: media.type,
 		});
 	};
 
+	// const onSelectURL = (...debug) => {
+	// 	console.log(debug);
+	// 	setAttributes({
+	// 		url: newURL,
+	// 		id: undefined,
+	// 		alt: '',
+	// 		type: '',
+	// 	});
+	// };
+
+	const removeMedia = () => {
+		setAttributes({
+			url: undefined,
+			alt: '',
+			id: undefined,
+			type: '',
+		});
+	};
+
+	const HERO_BLOCK_TEMPLATE = [
+		['core/heading', { placeholder: 'Title' }],
+		['core/paragraph', { placeholder: 'Description' }],
+		['core/button', { placeholder: 'Link' }],
+	];
+
 	return (
-		<p {...useBlockProps()}>
+		<>
 			{url && (
-				<div
-					className={`wp-block-cm-block-hero-block-img${
-						isBlobURL(url) ? ' is-loading' : ''
-					}`}
-				>
-					<img src={url} alt={alt} />
-					{isBlobURL(url) && <Spinner />}
-				</div>
+				<BlockControls group="inline">
+					<MediaReplaceFlow
+						name={__('Replace Media', 'team-members')}
+						onSelect={onSelectMedia}
+						// onSelectURL={onSelectURL}
+						// eslint-disable-next-line no-console
+						onError={(err) => console.log(err)}
+						accept="image/*, video/*"
+						allowedTypes={['image', 'video']}
+						mediaId={id}
+						mediaURL={url}
+					/>
+					<ToolbarButton onClick={removeMedia}>
+						{__('Remove Media', 'team-members')}
+					</ToolbarButton>
+				</BlockControls>
 			)}
-			<MediaPlaceholder
-				icon="admin-users"
-				onSelect={onSelectImage}
-				onSelectURL={onSelectURL}
-				// eslint-disable-next-line no-console
-				onError={(err) => console.log(err)}
-				accept="image/*"
-				allowedTypes={['image']}
-				disableMediaButtons={url}
-			/>
-			<RichText
-				placeholder={__('Title', 'hero-block')}
-				tagName="h4"
-				onChange={onChangeTitle}
-				value={title}
-				allowedFormats={[]}
-			/>
-			<RichText
-				placeholder={__('Description', 'hero-block')}
-				tagName="p"
-				onChange={onChangeDescription}
-				value={description}
-				allowedFormats={[]}
-			/>
-		</p>
+			<div {...useBlockProps()}>
+				<div className="wp-block-cm-block-hero-block__holder">
+					{url && (
+						<div
+							className={`wp-block-cm-block-hero-block__img-wrap${
+								isBlobURL(url) ? ' is-loading' : ''
+							}`}
+						>
+							{type === 'image' ? (
+								<img
+									className="wp-block-cm-block-hero-block__img"
+									src={url}
+									alt={alt}
+								/>
+							) : (
+								<video src={url} />
+							)}
+
+							{isBlobURL(url) && <Spinner />}
+						</div>
+					)}
+
+					<MediaPlaceholder
+						icon="admin-users"
+						onSelect={onSelectMedia}
+						// eslint-disable-next-line no-console
+						onError={(err) => console.log(err)}
+						accept="image/*, video/*"
+						allowedTypes={['image', 'video']}
+						disableMediaButtons={url}
+					/>
+					{url && (
+						<div className="wp-block-cm-block-hero-block__inner-block">
+							<InnerBlocks
+								template={HERO_BLOCK_TEMPLATE}
+								templateLock="all"
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+		</>
 	);
 }

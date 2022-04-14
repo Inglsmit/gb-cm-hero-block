@@ -1,0 +1,37 @@
+.u-center-text {
+  text-align: center;
+}
+
+.u-margin-top-middle {
+  margin-top: 2.4rem;
+  @include respond(tablet) {
+    margin-top: 3.6rem;
+  }
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 7rem;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem;
+}
+
+.u-margin-bottom-middle {
+  margin-bottom: 6rem;
+}
+
+.u-margin-right-middle {
+  margin-right: 15rem;
+  @include respond(tab-port) {
+    margin-right: 0;
+  }
+}
+
+.u-margin-left-small {
+  margin-left: 2.8rem;
+}
+
+.u-flex-justify-btw {
+  justify-content: space-between;
+}

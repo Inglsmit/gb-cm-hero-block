@@ -1,0 +1,54 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin footer-link-clear {
+  display: block;
+  text-decoration: none;
+  color: rgb(82, 82, 82);
+  line-height: 2rem;
+  &:hover {
+    color: rgb(0, 102, 179);
+
+    text-stroke: 1px #0066b3;
+    text-stroke: 0.5px #0066b3;
+    -webkit-text-stroke: 1px #0066b3;
+    -webkit-text-stroke: 0.5px #0066b3;
+  }
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == mobile {
+    @media only screen and (min-width: 640px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-land {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1280px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 1536px) {
+      @content;
+    }
+  }
+}

@@ -1,21 +1,38 @@
 /* eslint-disable no-unused-vars */
 // import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const { title, description, id, url, alt, btnTitle, btnUrl } = attributes;
+	const { id, url, alt, type } = attributes;
 	return (
 		<div {...useBlockProps.save()}>
 			{url && (
-				<img
-					src={url}
-					alt={alt}
-					className={id ? `wp-image-${id}` : null}
-				/>
-			)}
-			{title && <RichText.Content tagName="h1" value={title} />}
-			{description && (
-				<RichText.Content tagName="p" value={description} />
+				<>
+					<section className="hero">
+						<div className="section-wrap">
+							<div className="hero__text-box">
+								<InnerBlocks.Content />
+							</div>
+						</div>
+						<div className="hero__bg-mask">
+							{type === 'image' ? (
+								<img
+									src={url}
+									alt={alt}
+									className={id ? `wp-image-${id}` : null}
+								/>
+							) : (
+								<video
+									autoPlay
+									muted
+									src={url}
+									alt={alt}
+									className={id ? `wp-video-${id}` : null}
+								></video>
+							)}
+						</div>
+					</section>
+				</>
 			)}
 		</div>
 	);
