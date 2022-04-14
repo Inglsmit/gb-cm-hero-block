@@ -15,14 +15,14 @@
 		"alt": {
 			"type": "string",
 			"source": "attribute",
-			"selector": "img",
+			"selector": "img, video",
 			"attribute": "alt",
 			"default": ""
 		},
 		"url": {
 			"type": "string",
 			"source": "attribute",
-			"selector": "img",
+			"selector": "img, video",
 			"attribute": "src"
 		},
 		"type": {

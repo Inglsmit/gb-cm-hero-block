@@ -15,7 +15,13 @@ export default function save({ attributes }) {
 							className={id ? `wp-image-${id}` : null}
 						/>
 					) : (
-						<video src={url} alt={alt} />
+						<video
+							autoPlay
+							muted
+							src={url}
+							alt={alt}
+							className={id ? `wp-video-${id}` : null}
+						></video>
 					)}
 				</>
 			)}
