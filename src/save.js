@@ -9,36 +9,38 @@ export default function save({ attributes }) {
 			{url && (
 				<>
 					<div className="wp-block-cm-block-hero-block">
-						<div className="wp-block-cm-block-hero-block__wrap">
-							<div className="wp-block-cm-block-hero-block__text-box">
-								<InnerBlocks.Content />
+						<div className="wp-block-cm-block-hero-block__holder">
+							<div className="wp-block-cm-block-hero-block__media-wrap">
+								{type === 'image' ? (
+									<img
+										src={url}
+										alt={alt}
+										className={
+											id
+												? `wp-block-cm-block-hero-block__img wp-image-${id}`
+												: null
+										}
+									/>
+								) : (
+									<video
+										autoPlay
+										muted
+										loop
+										src={url}
+										alt={alt}
+										className={
+											id
+												? `wp-block-cm-block-hero-block__video wp-video-${id}`
+												: null
+										}
+									></video>
+								)}
 							</div>
-						</div>
-						<div className="wp-block-cm-block-hero-block__bg-mask">
-							{type === 'image' ? (
-								<img
-									src={url}
-									alt={alt}
-									className={
-										id
-											? `wp-block-cm-block-hero-block__img wp-image-${id}`
-											: null
-									}
-								/>
-							) : (
-								<video
-									autoPlay
-									muted
-									loop
-									src={url}
-									alt={alt}
-									className={
-										id
-											? `wp-block-cm-block-hero-block__video wp-video-${id}`
-											: null
-									}
-								></video>
-							)}
+							<div className="wp-block-cm-block-hero-block__inner-block">
+								<div className="wp-block-cm-block-hero-block__container">
+									<InnerBlocks.Content />
+								</div>
+							</div>
 						</div>
 					</div>
 				</>
