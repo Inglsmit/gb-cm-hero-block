@@ -73,11 +73,11 @@ export default function Edit({ attributes, setAttributes }) {
 					</ToolbarButton>
 				</BlockControls>
 			)}
-			<div {...useBlockProps()}>
+			<div {...useBlockProps()} data-align="full">
 				<div className="wp-block-cm-block-hero-block__holder">
 					{url && (
 						<div
-							className={`wp-block-cm-block-hero-block__img-wrap${
+							className={`wp-block-cm-block-hero-block__media-wrap${
 								isBlobURL(url) ? ' is-loading' : ''
 							}`}
 						>
@@ -88,7 +88,13 @@ export default function Edit({ attributes, setAttributes }) {
 									alt={alt}
 								/>
 							) : (
-								<video src={url} />
+								<video
+									autoPlay
+									muted
+									loop
+									className="wp-block-cm-block-hero-block__video"
+									src={url}
+								/>
 							)}
 
 							{isBlobURL(url) && <Spinner />}
@@ -106,10 +112,12 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 					{url && (
 						<div className="wp-block-cm-block-hero-block__inner-block">
-							<InnerBlocks
-								template={HERO_BLOCK_TEMPLATE}
-								templateLock="all"
-							/>
+							<div className="wp-block-cm-block-hero-block__container">
+								<InnerBlocks
+									template={HERO_BLOCK_TEMPLATE}
+									templateLock="all"
+								/>
+							</div>
 						</div>
 					)}
 				</div>
