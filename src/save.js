@@ -30,7 +30,6 @@ export default function save({ attributes }) {
 								loop
 								poster={posterURL}
 								src={url}
-								alt={alt}
 								className={
 									id
 										? `wp-block-cm-block-hero-block__video wp-video-${id}`
