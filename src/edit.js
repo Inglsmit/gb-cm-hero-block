@@ -223,54 +223,52 @@ function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 				</BlockControls>
 			)}
 			<div {...useBlockProps()} data-align="full">
-				<div className="wp-block-cm-block-hero-block__holder">
-					{url && (
-						<div
-							className={`wp-block-cm-block-hero-block__media-wrap${
-								isBlobURL(url) ? ' is-loading' : ''
-							}`}
-						>
-							{type === 'image' ? (
-								<img
-									className="wp-block-cm-block-hero-block__img"
-									src={url}
-									alt={alt}
-								/>
-							) : (
-								<video
-									autoPlay
-									muted
-									loop
-									className="wp-block-cm-block-hero-block__video"
-									src={url}
-								/>
-							)}
+				{url && (
+					<div
+						className={`wp-block-cm-block-hero-block__media-wrap${
+							isBlobURL(url) ? ' is-loading' : ''
+						}`}
+					>
+						{type === 'image' ? (
+							<img
+								className="wp-block-cm-block-hero-block__img"
+								src={url}
+								alt={alt}
+							/>
+						) : (
+							<video
+								autoPlay
+								muted
+								loop
+								className="wp-block-cm-block-hero-block__video"
+								src={url}
+							/>
+						)}
 
-							{isBlobURL(url) && <Spinner />}
-						</div>
-					)}
+						{isBlobURL(url) && <Spinner />}
+					</div>
+				)}
 
-					<MediaPlaceholder
-						icon="admin-users"
-						onSelect={onSelectMedia}
-						// eslint-disable-next-line no-console
-						onError={onUploadError}
-						accept="image/*, video/*"
-						allowedTypes={['image', 'video']}
-						disableMediaButtons={url}
-						notices={noticeUI}
-					/>
-					{url && (
-						<div className="wp-block-cm-block-hero-block__inner-block">
-							<div className="wp-block-cm-block-hero-block__container">
-								<InnerBlocks
-									template={HERO_BLOCK_TEMPLATE}
-									templateLock="all"
-								/>
-							</div>
+				<MediaPlaceholder
+					icon="admin-users"
+					onSelect={onSelectMedia}
+					// eslint-disable-next-line no-console
+					onError={onUploadError}
+					accept="image/*, video/*"
+					allowedTypes={['image', 'video']}
+					disableMediaButtons={url}
+					notices={noticeUI}
+				/>
+				{url && (
+					<div className="wp-block-cm-block-hero-block__inner-block">
+						<div className="wp-block-cm-block-hero-block__container">
+							<InnerBlocks
+								template={HERO_BLOCK_TEMPLATE}
+								templateLock="all"
+							/>
 						</div>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</>
 	);
