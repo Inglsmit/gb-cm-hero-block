@@ -40,7 +40,7 @@
 			height: 100%;
 		}
 
-		@media (max-width: 1280px){
+		@media (max-width: 1025px){
 			height: 100vh;
 		}
 	}
@@ -88,7 +88,7 @@
 			margin-right: 0;
 		}
 
-		h1 {
+		h1, h2 {
 			color: #fff;
 			backface-visibility: hidden;
 			display: inline-block;

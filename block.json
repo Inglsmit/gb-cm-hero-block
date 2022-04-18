@@ -27,6 +27,16 @@
 		},
 		"type": {
 			"type": "string"
+		},
+		"posterID": {
+			"type": "number",
+			"default": 0
+		},
+		"posterURL": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "video",
+			"attribute": "poster"
 		}
 	},
 	"textdomain": "hero-block",

@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	MediaPlaceholder,
+	MediaUploadCheck,
+	MediaUpload,
 	BlockControls,
 	MediaReplaceFlow,
 	InnerBlocks,
@@ -17,16 +19,27 @@ import {
 	PanelBody,
 	SelectControl,
 	TextareaControl,
+	Button,
+	ResponsiveWrapper,
 } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { id, url, alt, type } = attributes;
+	const { id, url, alt, type, posterID, posterURL } = attributes;
+	// console.log(attributes);
+	// console.log(posterID);
 
 	const onSelectMedia = (media) => {
 		// console.log(media);
 		if (!media || !media.url) {
-			setAttributes({ url: undefined, id: undefined, alt: '', type: '' });
+			setAttributes({
+				url: undefined,
+				id: undefined,
+				alt: '',
+				type: '',
+				posterID: 0,
+				posterURL: '',
+			});
 			return;
 		}
 		setAttributes({
@@ -34,6 +47,8 @@ export default function Edit({ attributes, setAttributes }) {
 			id: media.id,
 			alt: media.alt,
 			type: media.type,
+			posterID: 0,
+			posterURL: '',
 		});
 	};
 
@@ -90,6 +105,8 @@ export default function Edit({ attributes, setAttributes }) {
 			alt: '',
 			id: undefined,
 			type: '',
+			posterID: 0,
+			posterURL: '',
 		});
 	};
 
@@ -98,6 +115,25 @@ export default function Edit({ attributes, setAttributes }) {
 		['core/paragraph', { placeholder: 'Description' }],
 		['core/button', { placeholder: 'Link' }],
 	];
+
+	const onSelectPoster = (media) => {
+		// console.log(media);
+		if (!media || !media.url) {
+			setAttributes({ posterURL: '', posterID: 0 });
+			return;
+		}
+		setAttributes({
+			posterURL: media.url,
+			posterID: media.id,
+		});
+	};
+
+	const removePoster = () => {
+		setAttributes({
+			posterURL: '',
+			posterID: 0,
+		});
+	};
 
 	return (
 		<>
@@ -121,6 +157,46 @@ export default function Edit({ attributes, setAttributes }) {
 								'hero-block'
 							)}
 						/>
+					)}
+					{url && type === 'video' && (
+						<>
+							<MediaUploadCheck>
+								<MediaUpload
+									onSelect={onSelectPoster}
+									allowedTypes={['image']}
+									value={posterID}
+									render={({ open }) => (
+										<Button
+											className={
+												posterID === 0
+													? 'editor-post-featured-image__toggle'
+													: 'editor-post-featured-image__preview'
+											}
+											onClick={open}
+										>
+											{posterID === 0 &&
+												__(
+													'Set poster image',
+													'hero-block'
+												)}
+											{posterURL !== undefined && (
+												<img alt="" src={posterURL} />
+											)}
+										</Button>
+									)}
+								/>
+							</MediaUploadCheck>
+							{posterID !== 0 && (
+								<MediaUploadCheck>
+									<Button
+										onClick={removePoster}
+										isDestructive
+									>
+										{__('Remove poster', 'hero-block')}
+									</Button>
+								</MediaUploadCheck>
+							)}
+						</>
 					)}
 				</PanelBody>
 			</InspectorControls>

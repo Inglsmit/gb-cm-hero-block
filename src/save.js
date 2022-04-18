@@ -3,7 +3,7 @@
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const { id, url, alt, type } = attributes;
+	const { id, url, alt, type, posterID, posterURL } = attributes;
 	return (
 		<div
 			{...useBlockProps.save({
@@ -28,6 +28,7 @@ export default function save({ attributes }) {
 								autoPlay
 								muted
 								loop
+								poster={posterURL}
 								src={url}
 								alt={alt}
 								className={
