@@ -11,7 +11,7 @@ export default function save({ attributes }) {
 			})}
 		>
 			{url && (
-				<div className="wp-block-cm-block-hero-block__holder">
+				<>
 					<div className="wp-block-cm-block-hero-block__media-wrap">
 						{type === 'image' ? (
 							<img
@@ -43,7 +43,7 @@ export default function save({ attributes }) {
 							<InnerBlocks.Content />
 						</div>
 					</div>
-				</div>
+				</>
 			)}
 		</div>
 	);
