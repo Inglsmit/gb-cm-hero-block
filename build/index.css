@@ -1,7 +1,7 @@
 /*!****************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/editor.scss ***!
   \****************************************************************************************************************************************************************************************************************************************/
-.wp-block-cm-block-hero-block__inner-block .wp-block-heading {
+.editor-styles-wrapper .wp-block-cm-block-hero-block__inner-block .wp-block-heading {
   color: #fff;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -9,20 +9,40 @@
   font-family: "DINCondensedWebDemiBold", sans-serif;
   font-size: clamp(18px, 8vw, 128px);
   width: 84%;
-  max-width: 100%;
   text-transform: uppercase;
   line-height: 1;
-  margin: 0;
+  margin: 0 !important;
 }
-.wp-block-cm-block-hero-block__inner-block .wp-block-paragraph {
+@media (max-width: 768px) {
+  .editor-styles-wrapper .wp-block-cm-block-hero-block__inner-block .wp-block-heading {
+    font-size: 48px;
+  }
+}
+.editor-styles-wrapper .wp-block-cm-block-hero-block__inner-block .wp-block-paragraph {
   display: block;
   font-family: Karla, sans-serif;
   font-weight: normal;
   color: #fff;
   font-size: 24px;
   line-height: 32px;
-  margin-top: 20px;
+  margin: 20px 0 0 0 !important;
   width: 100%;
+}
+@media (max-width: 1025px) {
+  .editor-styles-wrapper .wp-block-cm-block-hero-block__inner-block .wp-block-paragraph {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media (max-width: 1025px) {
+  .editor-styles-wrapper .wp-block-cm-block-hero-block__inner-block .wp-block-button:not(.is-style-outline) {
+    margin: 32px 0 0 0;
+  }
+}
+.editor-styles-wrapper .wp-block-cm-block-hero-block__inner-block .wp-block-button:not(.is-style-outline) .wp-block-button__link:hover {
+  background-color: #00aeef !important;
+  color: #333333 !important;
+  border: none !important;
 }
 
 /*# sourceMappingURL=index.css.map*/

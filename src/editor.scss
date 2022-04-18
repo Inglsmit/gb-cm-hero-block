@@ -1,27 +1,47 @@
-.wp-block-cm-block-hero-block {
-	&__inner-block {
-		.wp-block-heading{
-			color: #fff;
-			backface-visibility: hidden;
-			display: inline-block;
-			font-family: "DINCondensedWebDemiBold", sans-serif;
-			font-size: clamp(18px, 8vw, 128px);
-			width: 84%;
-			max-width: 100%;
-			text-transform: uppercase;
-			line-height: 1;
-			margin: 0;
+.editor-styles-wrapper{
+	.wp-block-cm-block-hero-block {
+		&__inner-block {
+			.wp-block-heading{
+				color: #fff;
+				backface-visibility: hidden;
+				display: inline-block;
+				font-family: "DINCondensedWebDemiBold", sans-serif;
+				font-size: clamp(18px, 8vw, 128px);
+				width: 84%;
+				text-transform: uppercase;
+				line-height: 1;
+				margin: 0 !important;
+				@media (max-width: 768px){
+					font-size: 48px;
+				}
+			}
+
+			.wp-block-paragraph {
+				display: block;
+				font-family: Karla, sans-serif;
+				font-weight: normal;
+				color: #fff;
+				font-size: 24px;
+				line-height: 32px;
+				margin: 20px 0 0 0 !important;
+				width: 100%;
+				@media (max-width: 1025px){
+					font-size: 18px;
+					line-height: 28px;
+				}
+			}
+
+			.wp-block-button:not(.is-style-outline){
+				@media (max-width: 1025px){
+					margin: 32px 0 0 0;
+				}
+			}
+			.wp-block-button:not(.is-style-outline) .wp-block-button__link:hover{
+				background-color: #00aeef !important;
+				color: #333333 !important;
+				border: none !important;
+			}
 		}
 
-		.wp-block-paragraph {
-			display: block;
-			font-family: Karla, sans-serif;
-			font-weight: normal;
-			color: #fff;
-			font-size: 24px;
-			line-height: 32px;
-			margin-top: 20px;
-			width: 100%;
-		}
 	}
 }

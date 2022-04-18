@@ -6,9 +6,18 @@ import {
 	BlockControls,
 	MediaReplaceFlow,
 	InnerBlocks,
+	InspectorControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 import { isBlobURL } from '@wordpress/blob';
-import { Spinner, ToolbarButton } from '@wordpress/components';
+import {
+	Spinner,
+	ToolbarButton,
+	PanelBody,
+	SelectControl,
+	TextareaControl,
+} from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -28,6 +37,39 @@ export default function Edit({ attributes, setAttributes }) {
 		});
 	};
 
+	const imageObject = useSelect(
+		(select) => {
+			const { getMedia } = select('core');
+			return id ? getMedia(id) : null;
+		},
+		[id]
+	);
+
+	const imageSizes = useSelect((select) => {
+		return select(blockEditorStore).getSettings().imageSizes;
+	}, []);
+
+	const getImageSizeOptions = () => {
+		if (!imageObject) return [];
+		const options = [];
+		const sizes = imageObject.media_details.sizes;
+		for (const key in sizes) {
+			const size = sizes[key];
+			const imageSize = imageSizes.find((s) => s.slug === key);
+			if (imageSize) {
+				options.push({
+					label: imageSize.name,
+					value: size.source_url,
+				});
+			}
+		}
+		return options;
+	};
+
+	const onChangeImageSize = (newURL) => {
+		setAttributes({ url: newURL });
+	};
+
 	// const onSelectURL = (...debug) => {
 	// 	console.log(debug);
 	// 	setAttributes({
@@ -37,6 +79,10 @@ export default function Edit({ attributes, setAttributes }) {
 	// 		type: '',
 	// 	});
 	// };
+
+	const onChangeAlt = (newAlt) => {
+		setAttributes({ alt: newAlt });
+	};
 
 	const removeMedia = () => {
 		setAttributes({
@@ -55,10 +101,33 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<>
+			<InspectorControls>
+				<PanelBody title={__('Image Settings', 'hero-block')}>
+					{id && (
+						<SelectControl
+							label={__('Image Size', 'hero-block')}
+							options={getImageSizeOptions()}
+							value={url}
+							onChange={onChangeImageSize}
+						/>
+					)}
+					{url && !isBlobURL(url) && (
+						<TextareaControl
+							label={__('Alt Text', 'hero-block')}
+							value={alt}
+							onChange={onChangeAlt}
+							help={__(
+								"Alternative text describes your image to people can't see it. Add a short description with its key details.",
+								'hero-block'
+							)}
+						/>
+					)}
+				</PanelBody>
+			</InspectorControls>
 			{url && (
 				<BlockControls group="inline">
 					<MediaReplaceFlow
-						name={__('Replace Media', 'team-members')}
+						name={__('Replace Media', 'hero-block')}
 						onSelect={onSelectMedia}
 						// onSelectURL={onSelectURL}
 						// eslint-disable-next-line no-console
@@ -69,7 +138,7 @@ export default function Edit({ attributes, setAttributes }) {
 						mediaURL={url}
 					/>
 					<ToolbarButton onClick={removeMedia}>
-						{__('Remove Media', 'team-members')}
+						{__('Remove Media', 'hero-block')}
 					</ToolbarButton>
 				</BlockControls>
 			)}
