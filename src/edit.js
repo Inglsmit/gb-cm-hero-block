@@ -20,13 +20,12 @@ import {
 	SelectControl,
 	TextareaControl,
 	Button,
-	ResponsiveWrapper,
+	withNotices,
 } from '@wordpress/components';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes }) {
+function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 	const { id, url, alt, type, posterID, posterURL } = attributes;
-	// console.log(attributes);
 	// console.log(posterID);
 
 	const onSelectMedia = (media) => {
@@ -135,6 +134,11 @@ export default function Edit({ attributes, setAttributes }) {
 		});
 	};
 
+	const onUploadError = (message) => {
+		noticeOperations.removeAllNotices();
+		noticeOperations.createErrorNotice(message);
+	};
+
 	return (
 		<>
 			<InspectorControls>
@@ -147,7 +151,7 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={onChangeImageSize}
 						/>
 					)}
-					{url && !isBlobURL(url) && (
+					{url && !isBlobURL(url) && type === 'image' && (
 						<TextareaControl
 							label={__('Alt Text', 'hero-block')}
 							value={alt}
@@ -207,7 +211,7 @@ export default function Edit({ attributes, setAttributes }) {
 						onSelect={onSelectMedia}
 						// onSelectURL={onSelectURL}
 						// eslint-disable-next-line no-console
-						onError={(err) => console.log(err)}
+						onError={onUploadError}
 						accept="image/*, video/*"
 						allowedTypes={['image', 'video']}
 						mediaId={id}
@@ -250,10 +254,11 @@ export default function Edit({ attributes, setAttributes }) {
 						icon="admin-users"
 						onSelect={onSelectMedia}
 						// eslint-disable-next-line no-console
-						onError={(err) => console.log(err)}
+						onError={onUploadError}
 						accept="image/*, video/*"
 						allowedTypes={['image', 'video']}
 						disableMediaButtons={url}
+						notices={noticeUI}
 					/>
 					{url && (
 						<div className="wp-block-cm-block-hero-block__inner-block">
@@ -270,3 +275,5 @@ export default function Edit({ attributes, setAttributes }) {
 		</>
 	);
 }
+
+export default withNotices(Edit);
